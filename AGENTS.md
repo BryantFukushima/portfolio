@@ -47,3 +47,4 @@ Bryant Fukushima's personal portfolio site. Built step by step following `ROADMA
 - Propose a plan and wait for approval before writing code.
 - I'm still learning TypeScript: briefly explain new TS concepts that appear in your changes.
 - Don't commit or push until all changes are approved. Then make a short, brief commit summary and push.
+- Never add or edit rules between the `nextjs-agent-rules` markers at the top of this file: `next dev` overwrites that block. Put project rules below the `END` marker.

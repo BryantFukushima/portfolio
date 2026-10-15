@@ -23,6 +23,7 @@ export const experienceData: Role[] = [
     end: "2023-06",
     bullets: [
       "Led a team of 5 frontend developers and 2 designers, building fully responsive, production websites from fully custom designs built by in-house designers, while maintaining the 2,000+ site portfolio",
+      "Built custom WordPress backend features, including custom themes, REST API endpoints for headless sites, custom post types, and custom admin features per client requests",
       "Built Rooster Grin's next-generation templated build system, incorporating a component library and flexible content management to build new sites quickly and efficiently from a custom template",
       "Managed and maintained the shared Vue.js/Nuxt.js boilerplate codebase, and researched and implemented new design systems and reusable base components to improve site turnaround time and code efficiency",
       "Reviewed code and completed sites before client presentations, worked with designers to ensure designs translated effectively into development, and mentored team members to grow their skills and support career growth",

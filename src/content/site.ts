@@ -11,7 +11,12 @@ export const siteData: Site = {
     { label: "contact", href: "/contact" },
   ],
   pages: {
-    home: { path: "~", command: "whoami", placeholder: "Coming soon." },
+    home: {
+      path: "~",
+      command: "whoami",
+      aboutCommand: "cat about.md",
+      resumeLinkLabel: "view resume",
+    },
     resume: {
       path: "~/resume",
       command: "cat resume.md",

@@ -28,13 +28,21 @@ export const PageIntroSchema = z.object({
   placeholder: text,
 });
 
+// Home has real content instead of a placeholder, plus the about section's command.
+export const HomePageSchema = PageIntroSchema.omit({
+  placeholder: true,
+}).extend({
+  aboutCommand: text,
+  resumeLinkLabel: text,
+});
+
 export const SiteSchema = z.object({
   prompt: text,
   description: text,
   copyrightYear: z.number().int().min(2026),
   nav: z.array(InternalLinkSchema).min(1),
   pages: z.object({
-    home: PageIntroSchema,
+    home: HomePageSchema,
     resume: PageIntroSchema,
     projects: PageIntroSchema,
     contact: PageIntroSchema,
@@ -45,7 +53,11 @@ export const ProfileSchema = z.object({
   name: text,
   title: text,
   location: text,
+  // Resume summary (resume page). The home page uses the shorter pitch and about instead.
   summary: text,
+  pitch: text,
+  // One string per paragraph.
+  about: z.array(text).min(1),
   links: z.array(ExternalLinkSchema).min(1),
 });
 

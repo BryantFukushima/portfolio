@@ -39,3 +39,10 @@ What I learned and decided at each step.
 - `src/content/index.ts` validates every file, and every page imports from it, so bad content fails `next build` (and CI) with a message naming the file and field. Proved it with an end date before its start date: typecheck passed, the build failed.
 - Kept my phone number and email off the site. The downloadable resume will be a web version of the PDF without them.
 - Denied `unrs-resolver`'s install script with `npm deny-scripts` (its native binary already installs normally). CI now runs `npm audit --omit=dev`, so a vulnerability in code that ships fails the build. The current audit warnings are dev-only tooling with no patched version yet.
+
+### Step 6: Home: hero + about
+
+- The home page reads like the output of `whoami`: name, title, pitch and links, then a `cat about.md` section. The hero and about fade in once the command finishes typing (skipped with reduced motion).
+- One `h1` per page. Section titles use the same prompt style as `h2`s, so screen readers and search engines get a proper heading outline.
+- All text lives in `profile.ts` (pitch, about paragraphs) and is validated like the rest of the content. Home gets its own schema built from the page schema with `.omit()` and `.extend()`.
+- Skipped a headshot for now, so `next/image` moves to step 9 for project screenshots.

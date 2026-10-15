@@ -27,9 +27,9 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **2. Harness setup**: `CLAUDE.md`, Prettier, `typecheck` script, lint/typecheck hooks
   - Understand: why each guardrail exists; write `CLAUDE.md` mostly myself
   - Done when: `npm run check` passes (typecheck + lint + format); hook catches a deliberate error
-- [ ] **3. GitHub + CI + Vercel**: push repo, GitHub Actions (install → lint → typecheck → build), connect Vercel
+- [x] **3. GitHub + CI + Vercel**: push repo, GitHub Actions (install → check → build), connect Vercel
   - Understand: CI YAML line by line, preview deploys per PR
-  - Done when: live URL exists, CI is green
+  - Done when: live URL exists, CI is green (https://portfolio-iota-one-40.vercel.app until step 12)
 - [ ] **4. Layout shell**: root layout, header/nav, footer, fonts, color tokens (vaporwave palette)
   - Understand: nested layouts, `next/font`, Tailwind v4 `@theme` tokens
   - Done when: empty but styled site with working nav is deployed
@@ -51,8 +51,11 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [ ] **10. Tests**: Vitest (schemas, utils), Playwright smoke test, both in CI
   - Understand: what's worth testing on a mostly static site
   - Done when: CI runs tests on every PR
-- [ ] **11. Polish + launch**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, custom domain, README "How this was built"
-  - Done when: I'd send the link to a recruiter, and I do
+- [ ] **11. Polish**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, README "How this was built"
+  - Done when: I'd send the link to a recruiter
+- [ ] **12. Launch**: PR `phase-1-frontend` → `main` (CI must pass), connect `bryantfukushima.com` in Vercel
+  - Understand: production vs. preview deploys, DNS records
+  - Done when: `bryantfukushima.com` serves the Phase 1 site, and I send the link to a recruiter
 
 ## Phase 2: Database + admin CMS
 

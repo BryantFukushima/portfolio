@@ -7,11 +7,11 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const { command, placeholder } = site.pages.projects;
+  const { path, command, placeholder } = site.pages.projects;
 
   return (
     <section>
-      <PromptHeading command={command} />
+      <PromptHeading path={path} command={command} />
       <p className="mt-4 text-muted">{placeholder}</p>
     </section>
   );

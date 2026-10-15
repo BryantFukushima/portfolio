@@ -1,7 +1,7 @@
 import type { Site } from "@/content/schemas";
 
 export const siteData: Site = {
-  prompt: "bryant_fukushima@portfolio",
+  prompt: "bryant@fukushima",
   description: "Portfolio of Bryant Fukushima.",
   copyrightYear: 2026,
   nav: [
@@ -11,9 +11,21 @@ export const siteData: Site = {
     { label: "contact", href: "/contact" },
   ],
   pages: {
-    home: { command: "whoami", placeholder: "Coming soon." },
-    resume: { command: "cat resume.md", placeholder: "Coming soon." },
-    projects: { command: "ls projects", placeholder: "Coming soon." },
-    contact: { command: "cat contact.txt", placeholder: "Coming soon." },
+    home: { path: "~", command: "whoami", placeholder: "Coming soon." },
+    resume: {
+      path: "~/resume",
+      command: "cat resume.md",
+      placeholder: "Coming soon.",
+    },
+    projects: {
+      path: "~/projects",
+      command: "ls projects",
+      placeholder: "Coming soon.",
+    },
+    contact: {
+      path: "~/contact",
+      command: "cat contact.txt",
+      placeholder: "Coming soon.",
+    },
   },
 };

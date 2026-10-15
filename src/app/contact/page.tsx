@@ -7,11 +7,11 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const { command, placeholder } = site.pages.contact;
+  const { path, command, placeholder } = site.pages.contact;
 
   return (
     <section>
-      <PromptHeading command={command} />
+      <PromptHeading path={path} command={command} />
       <p className="mt-4 text-muted">{placeholder}</p>
     </section>
   );

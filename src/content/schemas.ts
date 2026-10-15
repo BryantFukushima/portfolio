@@ -20,6 +20,10 @@ export const ExternalLinkSchema = z.object({
 });
 
 export const PageIntroSchema = z.object({
+  // Shell path shown in the page title's prompt, e.g. "~" or "~/resume".
+  path: z
+    .string()
+    .regex(/^~(\/[a-z0-9-]+)*$/, 'Use "~" or "~/page", e.g. ~/resume'),
   command: text,
   placeholder: text,
 });

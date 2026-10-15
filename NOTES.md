@@ -19,5 +19,6 @@ What I learned and decided at each step.
 ### Step 3: GitHub + CI + Vercel
 
 - GitHub Actions runs `npm ci`, `npm run check` and `npm run build` on every push. It's the backstop: I proved it by pushing a type error with `--no-verify` (which skips the pre-commit hook), and CI still failed.
+- CI starts from a clean checkout, so anything gitignored or generated isn't there. My first run failed because `LayoutProps` lives in `.next/types/`, which only `next dev`/`build` create. Fix: `typecheck` runs `next typegen` first.
 - `.nvmrc` pins Node 24 so my machine, CI and Vercel all run the same version.
 - Vercel deploys `main` to production and gives every other branch a preview URL. Branch protection on `main` requires CI to pass before merging.

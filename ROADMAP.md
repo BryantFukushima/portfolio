@@ -1,6 +1,6 @@
 # Portfolio Roadmap
 
-Personal portfolio site, built in small, reviewable steps. Each step = one branch + one PR.
+Personal portfolio site, built in small, reviewable steps. Each phase has its own branch (`phase-1-frontend`, …); each step = one or a few commits on it.
 
 ## Design direction
 
@@ -14,8 +14,8 @@ Personal portfolio site, built in small, reviewable steps. Each step = one branc
 1. Ask for a plan first; adjust it before any code is written.
 2. Let AI implement, then read the full diff. Ask "why?" about anything unfamiliar.
 3. Change at least one thing by hand.
-4. Commit + PR with a description in my own words.
-5. Add 2–3 lines to `NOTES.md` on what I learned or decided.
+4. Once approved, commit with a short summary and push to the phase branch.
+5. Add notes to `NOTES.md` on what I learned or decided (as long as it needs to be).
 
 ---
 
@@ -24,9 +24,9 @@ Personal portfolio site, built in small, reviewable steps. Each step = one branc
 - [x] **1. Scaffold + run locally**: `create-next-app` (TS, Tailwind, App Router, ESLint, `src/`)
   - Understand: `app/`, `layout.tsx`, `page.tsx`, server vs. client components
   - Done when: starter page runs at `localhost:3000`
-- [ ] **2. Harness setup**: `CLAUDE.md`, Prettier, `typecheck` script, lint/typecheck hooks
+- [x] **2. Harness setup**: `CLAUDE.md`, Prettier, `typecheck` script, lint/typecheck hooks
   - Understand: why each guardrail exists; write `CLAUDE.md` mostly myself
-  - Done when: `npm run lint && npm run typecheck` pass; hook catches a deliberate error
+  - Done when: `npm run check` passes (typecheck + lint + format); hook catches a deliberate error
 - [ ] **3. GitHub + CI + Vercel**: push repo, GitHub Actions (install → lint → typecheck → build), connect Vercel
   - Understand: CI YAML line by line, preview deploys per PR
   - Done when: live URL exists, CI is green
@@ -55,10 +55,13 @@ Personal portfolio site, built in small, reviewable steps. Each step = one branc
   - Done when: I'd send the link to a recruiter, and I do
 
 ## Phase 2: Database + admin CMS
+
 Postgres (Neon) + Drizzle, auth-protected admin, move content from files to DB.
 
 ## Phase 3: "Ask about Bryant" AI chat
+
 Claude API, full context + prompt caching (no vector DB at this scale), streaming, rate limits, spend cap, eval set in CI.
 
 ## Phase 4 (optional): AWS deploy with IaC
+
 SST or Terraform deploy to AWS; write-up comparing it to Vercel.

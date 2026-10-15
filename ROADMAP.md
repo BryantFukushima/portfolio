@@ -30,7 +30,7 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **3. GitHub + CI + Vercel**: push repo, GitHub Actions (install → check → build), connect Vercel
   - Understand: CI YAML line by line, preview deploys per PR
   - Done when: live URL exists, CI is green (https://portfolio-iota-one-40.vercel.app until step 12)
-- [ ] **4. Layout shell**: root layout, header/nav, footer, fonts, color tokens (vaporwave palette)
+- [x] **4. Layout shell**: root layout, header/nav, footer, fonts, color tokens (vaporwave palette)
   - Understand: nested layouts, `next/font`, Tailwind v4 `@theme` tokens
   - Done when: empty but styled site with working nav is deployed
 - [ ] **5. Content layer**: `content/` with typed data + Zod schemas, filled from resume

@@ -17,6 +17,7 @@ export type Site = {
   socials: readonly SiteLink[];
   pages: {
     home: PageIntro;
+    resume: PageIntro;
     projects: PageIntro;
     contact: PageIntro;
   };
@@ -29,6 +30,7 @@ export const site: Site = {
   copyrightYear: 2026,
   nav: [
     { label: "home", href: "/" },
+    { label: "resume", href: "/resume" },
     { label: "projects", href: "/projects" },
     { label: "contact", href: "/contact" },
   ],
@@ -38,6 +40,7 @@ export const site: Site = {
   ],
   pages: {
     home: { command: "whoami", placeholder: "Coming soon." },
+    resume: { command: "cat resume.md", placeholder: "Coming soon." },
     projects: { command: "ls projects", placeholder: "Coming soon." },
     contact: { command: "cat contact.txt", placeholder: "Coming soon." },
   },

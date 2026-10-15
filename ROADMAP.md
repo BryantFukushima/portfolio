@@ -36,12 +36,12 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [ ] **5. Content layer**: `content/` with typed data + Zod schemas, filled from resume
   - Understand: content separate from components (swapped for Postgres in phase 2)
   - Done when: data imports cleanly; an invalid entry fails the build
-- [ ] **6. Home: hero + about**: name, title, pitch, links, resume PDF download
+- [ ] **6. Home: hero + about**: name, title, brief pitch, short about section, links, link to `/resume`
   - Understand: server components rendering content, `next/image`
   - Done when: home reads well on mobile and desktop
-- [ ] **7. Experience + skills**: role timeline, grouped skills
-  - Understand: typed data → reusable components
-  - Done when: sections are fully driven by content files
+- [ ] **7. Resume page**: `/resume` follows my PDF resume's structure (experience timeline, skills, education), with a "Download PDF" link at the top (PDF in `public/`)
+  - Understand: typed data → reusable components, serving static files
+  - Done when: page is fully driven by content files, and the PDF downloads
 - [ ] **8. Contact page**: `/contact` with GitHub + LinkedIn links and a click-to-reveal email
   - Understand: when a client component (`"use client"`) is actually needed; keeping the email out of the static HTML to deter scrapers
   - Done when: email only appears in the page after clicking

@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Only our palette exists: Tailwind's default colors are removed so raw colors can't sneak in. */
+  --color-*: initial;
+  --color-bg: #1a0f29;
+  --color-surface: #261838;
+  --color-line: #3a2a52;
+  --color-fg: #ece6f5;
+  --color-muted: #b3a8c7;
+  --color-teal: #5ee6d0;
+  --color-magenta: #ff71ce;
+  --color-yellow: #f9e27d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Typing effect for PromptHeading. Both read --chars (the command's length) from the heading.
+     They must be `inline`: otherwise var(--chars) resolves on :root, where it doesn't exist. */
+  --animate-type: type calc(var(--chars) * 70ms) steps(var(--chars), end) 300ms
+    both;
+  --animate-blink-out: blink-out 3s step-end calc(300ms + var(--chars) * 70ms)
+    forwards;
+
+  /* Grows from 0 to the element's width; steps() reveals one character per step. */
+  @keyframes type {
+    from {
+      width: 0;
+    }
+  }
+
+  /* Blinks three times after typing finishes, then stays hidden. */
+  @keyframes blink-out {
+    0%,
+    33.3%,
+    66.6% {
+      opacity: 1;
+    }
+    16.6%,
+    50%,
+    83.3%,
+    100% {
+      opacity: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-magenta);
+    color: var(--color-bg);
+  }
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PromptHeading } from "@/components/prompt-heading";
-import { site } from "@/content/site";
+import { site } from "@/content";
 
 export const metadata: Metadata = {
   title: "Projects",

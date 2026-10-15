@@ -1,13 +1,17 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
 import { NavLink } from "@/components/nav-link";
-import { site } from "@/content/site";
+import { profile, site } from "@/content";
 
 export function SiteHeader() {
   return (
     <header className="border-b border-line">
       <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-2">
-        <Link href="/" aria-label={`${site.name}, home`} className="font-bold">
+        <Link
+          href="/"
+          aria-label={`${profile.name}, home`}
+          className="font-bold"
+        >
           <span className="text-teal">{site.prompt}</span>
           <span className="text-muted">:~</span>
           <Logo className="ml-2 text-magenta" />

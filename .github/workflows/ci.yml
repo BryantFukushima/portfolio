@@ -32,6 +32,9 @@ jobs:
 
       - run: npm ci
 
+      # Fail on known vulnerabilities in code that ships to the site (dev tools excluded).
+      - run: npm audit --omit=dev
+
       # Same check as the pre-commit hook: typecheck + lint + format.
       - run: npm run check
 

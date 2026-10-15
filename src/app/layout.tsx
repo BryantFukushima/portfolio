@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { site } from "@/content/site";
+import { profile, site } from "@/content";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -12,8 +12,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: site.name,
-    template: `%s | ${site.name}`,
+    default: profile.name,
+    template: `%s | ${profile.name}`,
   },
   description: site.description,
 };

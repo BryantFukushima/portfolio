@@ -33,7 +33,7 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **4. Layout shell**: root layout, header/nav, footer, fonts, color tokens (vaporwave palette)
   - Understand: nested layouts, `next/font`, Tailwind v4 `@theme` tokens
   - Done when: empty but styled site with working nav is deployed
-- [ ] **5. Content layer**: `content/` with typed data + Zod schemas, filled from resume
+- [x] **5. Content layer**: `content/` with typed data + Zod schemas, filled from resume
   - Understand: content separate from components (swapped for Postgres in phase 2)
   - Done when: data imports cleanly; an invalid entry fails the build
 - [ ] **6. Home: hero + about**: name, title, brief pitch, short about section, links, link to `/resume`

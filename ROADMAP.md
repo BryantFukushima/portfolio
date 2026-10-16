@@ -48,7 +48,7 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **9. Projects + first case study**: projects grid, `/projects/[slug]`, ECS migration case study (MDX + diagram)
   - Understand: dynamic routes, `generateStaticParams`, MDX
   - Done when: case study page is live
-- [ ] **10. Tests**: Vitest (schemas, utils), Playwright smoke test, both in CI
+- [x] **10. Tests**: Vitest (schemas, utils), Playwright smoke test, both in CI
   - Understand: what's worth testing on a mostly static site
   - Done when: CI runs tests on every PR
 - [ ] **11. Polish**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, README "How this was built"

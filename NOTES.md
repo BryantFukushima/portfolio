@@ -42,7 +42,7 @@ What I learned and decided at each step.
 
 ### Step 6: Home: hero + about
 
-- The home page reads like the output of `whoami`: name, title, pitch and links, then a `cat about.md` section. The hero and about fade in once the command finishes typing (skipped with reduced motion).
+- The home page reads like the output of `whoami`: name, title, pitch and links, then a `cat about.txt` section. The hero and about fade in once the command finishes typing (skipped with reduced motion).
 - One `h1` per page. Section titles use the same prompt style as `h2`s, so screen readers and search engines get a proper heading outline.
 - All text lives in `profile.ts` (pitch, about paragraphs) and is validated like the rest of the content. Home gets its own schema built from the page schema with `.omit()` and `.extend()`.
 - Skipped a headshot for now, so `next/image` moves to step 9 for project screenshots.

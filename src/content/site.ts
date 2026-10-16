@@ -14,7 +14,7 @@ export const siteData: Site = {
     home: {
       path: "~",
       command: "whoami",
-      aboutCommand: "cat about.md",
+      aboutCommand: "cat about.txt",
       resumeLinkLabel: "view resume",
     },
     resume: {

@@ -38,4 +38,38 @@ jobs:
       # Same check as the pre-commit hook: typecheck + lint + format.
       - run: npm run check
 
+      # Unit tests (Vitest): content rules and helpers.
+      - run: npm test
+
       - run: npm run build
+
+      # Browser smoke tests (Playwright) against the production build. Chromium is cached per
+      # Playwright version, so it only downloads when Playwright is upgraded.
+      - id: playwright-version
+        run: echo "version=$(node -p "require('./node_modules/@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v6
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+
+      - if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      # A cached browser still needs its system libraries on a fresh runner.
+      - if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      # A placeholder address, so the contact page's reveal can be tested without the real one.
+      - run: npm run test:e2e
+        env:
+          CONTACT_EMAIL: test@example.com
+
+      # On failure, upload the report (screenshots, traces) to the run's Artifacts.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

@@ -7,7 +7,7 @@ import {
   type CaseStudy,
   EducationSchema,
   ProfileSchema,
-  ProjectSchema,
+  ProjectListSchema,
   RoleSchema,
   type SideProject,
   SiteSchema,
@@ -51,19 +51,7 @@ export const education = parseContent(
 );
 export const projects = parseContent(
   "projects.ts",
-  z
-    .array(ProjectSchema)
-    .min(1)
-    // Two case studies with the same slug would share one URL.
-    .refine(
-      (list) => {
-        const slugs = list.flatMap((p) =>
-          p.kind === "case-study" ? [p.slug] : [],
-        );
-        return new Set(slugs).size === slugs.length;
-      },
-      { message: "Case study slugs must be unique" },
-    ),
+  ProjectListSchema,
   projectsData,
 );
 

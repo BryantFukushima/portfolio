@@ -1,53 +1,10 @@
-import { Cursor } from "@/components/cursor";
-import { Logo } from "@/components/logo";
+import { PromptLine, type PromptLineProps } from "@/components/prompt-line";
 import { site } from "@/content";
-import type { CSSVars } from "@/lib/css";
 
-type PromptHeadingProps = {
-  path: string;
-  command: string;
-  // 1 = page title (h1, types itself out). 2 = section title (h2, smaller and static).
-  level?: 1 | 2;
-};
+// `Omit<PromptLineProps, "prompt">` is every PromptLine prop except `prompt`, which comes from
+// site content here, so pages only pass the path and command.
+type PromptHeadingProps = Omit<PromptLineProps, "prompt">;
 
-// Heading styled as a shell line, e.g. "bryant@fukushima:~/resume [logo] cat resume.md".
-// The prompt is static; on page titles the command types itself out. The full text is always in
-// the HTML; CSS only reveals the command one character (1ch) at a time.
-// Each half is nowrap, so on narrow screens the line breaks between the prompt and the logo.
-export function PromptHeading({
-  path,
-  command,
-  level = 1,
-}: PromptHeadingProps) {
-  const style: CSSVars = { "--chars": command.length };
-  const isTitle = level === 1;
-  const Tag = isTitle ? "h1" : "h2";
-
-  return (
-    <Tag
-      style={style}
-      className={`font-bold ${isTitle ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"}`}
-    >
-      {/* Hidden from screen readers so the heading reads as just the command. */}
-      <span aria-hidden="true" className="whitespace-nowrap">
-        <span className="text-teal">{site.prompt}</span>
-        <span className="text-muted">:{path}</span>
-      </span>
-      {/* No space before the logo, but still a place to wrap on narrow screens. */}
-      <wbr />
-      <span className="whitespace-nowrap">
-        <Logo className="mr-3 ml-1 text-magenta" />
-        {isTitle ? (
-          <>
-            <span className="inline-block w-[calc(var(--chars)*1ch)] overflow-hidden align-bottom whitespace-nowrap motion-safe:animate-type">
-              {command}
-            </span>
-            <Cursor />
-          </>
-        ) : (
-          command
-        )}
-      </span>
-    </Tag>
-  );
+export function PromptHeading(props: PromptHeadingProps) {
+  return <PromptLine prompt={site.prompt} {...props} />;
 }

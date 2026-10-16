@@ -49,5 +49,15 @@ export const siteData: Site = {
       loadingLabel: "loading…",
       errorMessage: "Couldn't load the email. Try LinkedIn instead.",
     },
+    notFound: {
+      path: "~",
+      command: "cd",
+      title: "Not found",
+      fallbackTarget: "not-found",
+      error: "no such file or directory",
+      message: "This page doesn't exist or has moved.",
+      homeLabel: "cd ~",
+      homeHint: "(return home)",
+    },
   },
 };

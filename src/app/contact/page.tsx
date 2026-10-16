@@ -3,15 +3,11 @@ import { EmailReveal } from "@/components/email-reveal";
 import { PromptHeading } from "@/components/prompt-heading";
 import { profile, site } from "@/content";
 import type { CSSVars } from "@/lib/css";
+import { displayUrl } from "@/lib/urls";
 
 export const metadata: Metadata = {
   title: "Contact",
 };
-
-// "https://www.linkedin.com/in/x" → "linkedin.com/in/x", like the resume's contact line.
-function displayUrl(href: string): string {
-  return href.replace(/^https?:\/\/(www\.)?/, "");
-}
 
 export default function ContactPage() {
   const { path, command, emailLabel, revealLabel, loadingLabel, errorMessage } =

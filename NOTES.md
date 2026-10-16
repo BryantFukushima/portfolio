@@ -68,3 +68,11 @@ What I learned and decided at each step.
 - `src/mdx-components.tsx` (required by `@next/mdx`) styles Markdown elements to match the site, and makes `<ArchitectureDiagram>` usable in any MDX file without an import.
 - The diagram is HTML lists, not an image, so it's real text: screen readers read it, it scales with the font and it stacks on mobile.
 - The case study is about my own work (the problem, my role, results and lessons), not my employer's system. The company isn't named and there are no internal details: no service names, numbers, security specifics or roadmap. The stack is reduced to AWS ECS, Docker and CI/CD.
+
+### Step 10: Tests
+
+- On a mostly static site, the tests that matter guard where a mistake would ship silently: content rules, small helpers, and "does each page actually work in a browser". Not every component.
+- Vitest runs unit tests in Node: every schema rule, the date and URL helpers, `getEmail()` with a fake env value, and checks on the real content (each case study has an MDX file, the resume PDF exists, no email or phone number in `src/content/`). They take under a second, so the pre-commit hook runs them too.
+- Playwright smoke tests click through the site in Chromium: every page loads, the nav works, the PDF downloads, the email only appears after the click, and unknown projects 404. Locally they reuse `next dev`; in CI they run against the production build.
+- The tests caught a real bug: with Cache Components, the first visit to an unknown `/projects/<slug>` returned 200, because the static shell starts streaming before `notFound()` runs. `src/proxy.ts` (Next 16's name for middleware) now checks the slug before rendering and serves a real 404.
+- Bumped `@types/node` to 24 to match the Node version the site actually runs on.

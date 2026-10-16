@@ -79,6 +79,19 @@ export const ProjectsPageSchema = PageIntroSchema.omit({
   backLabel: text,
 });
 
+// The 404 page reads like a failed `cd`: "cd projects/zzz" → "cd: no such file or directory: …".
+export const NotFoundPageSchema = PageIntroSchema.omit({
+  placeholder: true,
+}).extend({
+  title: text,
+  // Shown in place of the typed path until the browser fills it in.
+  fallbackTarget: text,
+  error: text,
+  message: text,
+  homeLabel: text,
+  homeHint: text,
+});
+
 export const SiteSchema = z.object({
   prompt: text,
   description: text,
@@ -89,6 +102,7 @@ export const SiteSchema = z.object({
     resume: ResumePageSchema,
     projects: ProjectsPageSchema,
     contact: ContactPageSchema,
+    notFound: NotFoundPageSchema,
   }),
 });
 
@@ -154,6 +168,20 @@ export const ProjectSchema = z.discriminatedUnion("kind", [
   CaseStudySchema,
   SideProjectSchema,
 ]);
+
+export const ProjectListSchema = z
+  .array(ProjectSchema)
+  .min(1)
+  // Two case studies with the same slug would share one URL.
+  .refine(
+    (list) => {
+      const slugs = list.flatMap((p) =>
+        p.kind === "case-study" ? [p.slug] : [],
+      );
+      return new Set(slugs).size === slugs.length;
+    },
+    { message: "Case study slugs must be unique" },
+  );
 
 // TypeScript types generated from the schemas, so the shape is only defined once.
 export type InternalLink = z.infer<typeof InternalLinkSchema>;

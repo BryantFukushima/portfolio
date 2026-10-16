@@ -53,3 +53,10 @@ What I learned and decided at each step.
 - Section headings are Markdown-style (`## Experience`), since the page is the output of `cat resume.md`. The `##` is `aria-hidden`.
 - Files in `public/` are served as-is from the site root. The PDF link is a plain `<a download>`, not `<Link>`, because it's a file, not a page. It's the web version of the resume, without phone or email.
 - Dates are stored as `YYYY-MM` and formatted with a fixed month list instead of `Date`, so time zones can't shift a month. Each date sits in a `<time dateTime>` element so machines can read it too.
+
+### Step 8: Contact page
+
+- The repo is public, so the email can't live in `src/content/`. It's in the `CONTACT_EMAIL` env var: `.env.local` locally (gitignored) and Vercel's Environment Variables in production. No `NEXT_PUBLIC_` prefix, or Next.js would bake it into the browser JavaScript.
+- A Server Action (`"use server"`) reads it only when "show email" is clicked. The email isn't in the HTML, the JS bundle or the repo. The action is a public POST endpoint, which is fine here: it takes no input and returns only what the page would show. Next.js rejects calls from other origins.
+- `EmailReveal` is the only client component on the page (it needs a click handler and state). Everything else renders on the server. After the reveal, focus moves to the email link so keyboard users don't lose their place.
+- If the env var is missing, the build still passes (it's only read on click) and the page shows a short error instead of crashing.

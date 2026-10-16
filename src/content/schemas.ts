@@ -55,6 +55,17 @@ export const ResumePageSchema = PageIntroSchema.omit({
   }),
 });
 
+// Contact has real content instead of a placeholder. The email itself isn't here: the repo is
+// public, so it lives in the CONTACT_EMAIL environment variable and is only sent after a click.
+export const ContactPageSchema = PageIntroSchema.omit({
+  placeholder: true,
+}).extend({
+  emailLabel: text,
+  revealLabel: text,
+  loadingLabel: text,
+  errorMessage: text,
+});
+
 export const SiteSchema = z.object({
   prompt: text,
   description: text,
@@ -64,7 +75,7 @@ export const SiteSchema = z.object({
     home: HomePageSchema,
     resume: ResumePageSchema,
     projects: PageIntroSchema,
-    contact: PageIntroSchema,
+    contact: ContactPageSchema,
   }),
 });
 

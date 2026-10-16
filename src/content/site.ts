@@ -39,7 +39,10 @@ export const siteData: Site = {
     contact: {
       path: "~/contact",
       command: "cat contact.txt",
-      placeholder: "Coming soon.",
+      emailLabel: "email",
+      revealLabel: "show email",
+      loadingLabel: "loading…",
+      errorMessage: "Couldn't load the email. Try LinkedIn instead.",
     },
   },
 };

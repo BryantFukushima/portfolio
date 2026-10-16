@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ExternalLink } from "@/components/external-link";
 import { profile, site } from "@/content";
 
 // Home page intro: the "output" of `whoami`.
@@ -24,15 +25,12 @@ export function Hero() {
         </li>
         {profile.links.map((link) => (
           <li key={link.href}>
-            <a
+            <ExternalLink
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-block py-2 text-muted hover:text-teal"
             >
-              {link.label} <span aria-hidden="true">↗</span>
-              <span className="sr-only"> (opens in a new tab)</span>
-            </a>
+              {link.label}
+            </ExternalLink>
           </li>
         ))}
       </ul>

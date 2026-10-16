@@ -30,6 +30,7 @@ export default function ResumePage() {
           className="mt-8 inline-block border border-teal px-4 py-2 text-teal hover:bg-teal hover:text-bg"
         >
           {download.label} <span aria-hidden="true">↓</span>
+          <span className="sr-only"> (PDF)</span>
         </a>
 
         <ResumeSection heading={sections.summary}>

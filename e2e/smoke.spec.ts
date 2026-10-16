@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 // Expectations come from the same content files as the site, so editing copy doesn't break tests.
 import { caseStudies, profile, site } from "@/content";
+import { revealEmail } from "./helpers";
 
 const pages = [
   { path: "/", command: site.pages.home.command, title: profile.name },
@@ -60,14 +61,11 @@ test("resume PDF downloads", async ({ page, request }) => {
 });
 
 test("contact email only appears after clicking", async ({ page }) => {
-  const { revealLabel } = site.pages.contact;
   await page.goto("/contact");
   // page.content() is the full HTML, including the data React hydrates from.
   expect(await page.content()).not.toMatch(emailPattern);
 
-  await page.getByRole("button", { name: revealLabel }).click();
-  const link = page.getByRole("link", { name: emailPattern });
-  await expect(link).toBeVisible();
+  const link = await revealEmail(page);
   await expect(link).toHaveAttribute("href", /^mailto:/);
   // Focus moves to the email so keyboard users don't lose their place.
   await expect(link).toBeFocused();

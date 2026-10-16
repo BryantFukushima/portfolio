@@ -87,3 +87,10 @@ What I learned and decided at each step.
 - `src/lib/theme.ts` copies the palette for the images, and a test keeps it in sync with `globals.css`.
 - Favicon: my `.ico` for older browsers, plus an `icon.svg` with the same design that switches to light strokes in dark mode (black lines vanish on dark tabs), and an Apple home-screen icon on white.
 - JSON-LD "Person" data on the home page links my name to my GitHub and LinkedIn for search engines.
+
+**B. Accessibility pass**
+
+- axe (`@axe-core/playwright`) scans every page, the 404 page and the revealed contact page against WCAG 2.2 AA in CI. It found nothing, so I proved it works by planting a missing alt, low contrast and an unnamed button: it caught all three.
+- Automated tests also check reflow (no sideways scrolling at 320px wide) and the skip link. The reflow test found a real bug: long heading paths like `~/projects/ecs-migration` were set to never wrap and overflowed phones by up to 188px. They now break only before a `/`.
+- Things axe can't judge, found by reading the code: the header link's `aria-label` hid its visible text, which breaks voice control ("Label in Name"), so the visible text is now the name; footer links didn't say they open a new tab (now one `ExternalLink` component handles that everywhere); the resume link now says it's a PDF.
+- Lesson: a test that never fails proves nothing; break it on purpose once.

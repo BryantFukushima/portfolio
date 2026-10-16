@@ -1,3 +1,4 @@
+import { ExternalLink } from "@/components/external-link";
 import { profile, site } from "@/content";
 
 export function SiteFooter() {
@@ -10,14 +11,13 @@ export function SiteFooter() {
         <ul className="flex gap-5">
           {profile.links.map((link) => (
             <li key={link.href}>
-              <a
+              <ExternalLink
                 href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-teal"
+                arrow={false}
+                className="inline-block py-2 hover:text-teal"
               >
                 {link.label}
-              </a>
+              </ExternalLink>
             </li>
           ))}
         </ul>

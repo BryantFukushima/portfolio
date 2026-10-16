@@ -34,7 +34,12 @@ export const siteData: Site = {
     projects: {
       path: "~/projects",
       command: "ls projects",
-      placeholder: "Coming soon.",
+      sections: {
+        caseStudies: "Case studies",
+        sideProjects: "Projects",
+      },
+      readLabel: "read case study",
+      backLabel: "cd ..",
     },
     contact: {
       path: "~/contact",

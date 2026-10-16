@@ -42,10 +42,10 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **7. Resume page**: `/resume` follows my PDF resume's structure (experience timeline, skills, education), with a "Download PDF" link at the top (PDF in `public/`)
   - Understand: typed data → reusable components, serving static files
   - Done when: page is fully driven by content files, and the PDF downloads
-- [ ] **8. Contact page**: `/contact` with GitHub + LinkedIn links and a click-to-reveal email
+- [x] **8. Contact page**: `/contact` with GitHub + LinkedIn links and a click-to-reveal email
   - Understand: when a client component (`"use client"`) is actually needed; keeping the email out of the static HTML to deter scrapers
   - Done when: email only appears in the page after clicking
-- [ ] **9. Projects + first case study**: projects grid, `/projects/[slug]`, ECS migration case study (MDX + diagram)
+- [x] **9. Projects + first case study**: projects grid, `/projects/[slug]`, ECS migration case study (MDX + diagram)
   - Understand: dynamic routes, `generateStaticParams`, MDX
   - Done when: case study page is live
 - [ ] **10. Tests**: Vitest (schemas, utils), Playwright smoke test, both in CI

@@ -2,10 +2,14 @@ import { z } from "zod";
 import { educationData } from "@/content/education";
 import { experienceData } from "@/content/experience";
 import { profileData } from "@/content/profile";
+import { projectsData } from "@/content/projects";
 import {
+  type CaseStudy,
   EducationSchema,
   ProfileSchema,
+  ProjectSchema,
   RoleSchema,
+  type SideProject,
   SiteSchema,
   SkillGroupSchema,
 } from "@/content/schemas";
@@ -45,3 +49,33 @@ export const education = parseContent(
   z.array(EducationSchema).min(1),
   educationData,
 );
+export const projects = parseContent(
+  "projects.ts",
+  z
+    .array(ProjectSchema)
+    .min(1)
+    // Two case studies with the same slug would share one URL.
+    .refine(
+      (list) => {
+        const slugs = list.flatMap((p) =>
+          p.kind === "case-study" ? [p.slug] : [],
+        );
+        return new Set(slugs).size === slugs.length;
+      },
+      { message: "Case study slugs must be unique" },
+    ),
+  projectsData,
+);
+
+// `p is CaseStudy` is a type guard: it tells TypeScript that everything the filter keeps is a
+// CaseStudy, so `caseStudies` is CaseStudy[] instead of Project[].
+export const caseStudies = projects.filter(
+  (p): p is CaseStudy => p.kind === "case-study",
+);
+export const sideProjects = projects.filter(
+  (p): p is SideProject => p.kind === "side-project",
+);
+
+export function findCaseStudy(slug: string): CaseStudy | undefined {
+  return caseStudies.find((p) => p.slug === slug);
+}

@@ -66,6 +66,19 @@ export const ContactPageSchema = PageIntroSchema.omit({
   errorMessage: text,
 });
 
+// Projects has real content instead of a placeholder: section headings and link labels.
+export const ProjectsPageSchema = PageIntroSchema.omit({
+  placeholder: true,
+}).extend({
+  sections: z.object({
+    caseStudies: text,
+    sideProjects: text,
+  }),
+  readLabel: text,
+  // Link from a case study back to /projects.
+  backLabel: text,
+});
+
 export const SiteSchema = z.object({
   prompt: text,
   description: text,
@@ -74,7 +87,7 @@ export const SiteSchema = z.object({
   pages: z.object({
     home: HomePageSchema,
     resume: ResumePageSchema,
-    projects: PageIntroSchema,
+    projects: ProjectsPageSchema,
     contact: ContactPageSchema,
   }),
 });
@@ -117,6 +130,31 @@ export const EducationSchema = z.object({
   year: z.number().int().min(1900).max(2100),
 });
 
+// Fields every project has.
+const projectBase = z.object({
+  title: text,
+  summary: text,
+  stack: z.array(text).min(1),
+});
+
+// A case study gets its own page at /projects/<slug>, written in src/content/projects/<slug>.mdx.
+export const CaseStudySchema = projectBase.extend({
+  kind: z.literal("case-study"),
+  slug: z.string().regex(/^[a-z0-9-]+$/, "Use lowercase-and-dashes"),
+});
+
+// A side project links out (e.g. to its GitHub repo) instead of having its own page.
+export const SideProjectSchema = projectBase.extend({
+  kind: z.literal("side-project"),
+  link: ExternalLinkSchema,
+});
+
+// `kind` decides which of the two shapes a project must match.
+export const ProjectSchema = z.discriminatedUnion("kind", [
+  CaseStudySchema,
+  SideProjectSchema,
+]);
+
 // TypeScript types generated from the schemas, so the shape is only defined once.
 export type InternalLink = z.infer<typeof InternalLinkSchema>;
 export type ExternalLink = z.infer<typeof ExternalLinkSchema>;
@@ -125,3 +163,6 @@ export type Profile = z.infer<typeof ProfileSchema>;
 export type Role = z.infer<typeof RoleSchema>;
 export type SkillGroup = z.infer<typeof SkillGroupSchema>;
 export type Education = z.infer<typeof EducationSchema>;
+export type CaseStudy = z.infer<typeof CaseStudySchema>;
+export type SideProject = z.infer<typeof SideProjectSchema>;
+export type Project = z.infer<typeof ProjectSchema>;

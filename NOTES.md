@@ -60,3 +60,11 @@ What I learned and decided at each step.
 - A Server Action (`"use server"`) reads it only when "show email" is clicked. The email isn't in the HTML, the JS bundle or the repo. The action is a public POST endpoint, which is fine here: it takes no input and returns only what the page would show. Next.js rejects calls from other origins.
 - `EmailReveal` is the only client component on the page (it needs a click handler and state). Everything else renders on the server. After the reveal, focus moves to the email link so keyboard users don't lose their place.
 - If the env var is missing, the build still passes (it's only read on click) and the page shows a short error instead of crashing.
+
+### Step 9: Projects + first case study
+
+- `/projects/[slug]` is a dynamic route: the folder name in brackets matches any slug. `generateStaticParams()` lists the case studies so each page is built at build time. An unknown slug calls `notFound()` (Cache Components removed `dynamicParams`).
+- Project details live in `projects.ts` and are checked by Zod. A discriminated union on `kind` means a case study must have a `slug` and a side project must have a `link`. Each case study's body is MDX in `src/content/projects/<slug>.mdx`, loaded with a dynamic `import()`.
+- `src/mdx-components.tsx` (required by `@next/mdx`) styles Markdown elements to match the site, and makes `<ArchitectureDiagram>` usable in any MDX file without an import.
+- The diagram is HTML lists, not an image, so it's real text: screen readers read it, it scales with the font and it stacks on mobile.
+- Built the case study with placeholders first; the real write-up comes once I've answered the content questions.

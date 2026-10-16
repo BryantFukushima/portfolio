@@ -55,7 +55,10 @@ for (const path of paths) {
 
 test("skip link is the first stop and jumps to the main content", async ({
   page,
+  isMobile,
 }) => {
+  // Phones have no Tab key, so there's nothing to test there.
+  test.skip(isMobile, "keyboard-only");
   await page.goto("/resume");
   await page.keyboard.press("Tab");
   const skip = page.getByRole("link", { name: "Skip to content" });

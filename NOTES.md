@@ -101,3 +101,13 @@ What I learned and decided at each step.
 - Home on mobile scores 97, not 100, because the largest element is the `whoami` heading, which types itself out. That's the design, and it's skipped with reduced motion.
 - Measure the production build, not `next dev`: dev mode is unoptimized and scores much lower.
 - The README now explains how the site was built (stack, architecture, a11y, privacy, tests) instead of the create-next-app template.
+
+### Step 12: Launch
+
+- Vercel builds every push. `main` becomes the **production** deploy (the real domain); every other branch gets its own **preview** URL, password-protected and marked `noindex` so search engines skip it. Merging a PR into `main` is the release.
+- DNS (in Route 53): an **A record** points `bryantfukushima.com` to Vercel's IP address, and a **CNAME** points `www` to a Vercel host name (a CNAME is an alias for another name; the bare domain can't have one, so it gets an A record). Vercel issues the HTTPS certificate on its own once DNS resolves. Copy the values Vercel shows, since they change over time.
+- `www.bryantfukushima.com` is the main address, and the bare domain redirects to it (308). `site.url` has to match, because canonical links, the sitemap and link previews all come from it.
+- Two bugs only showed up on the real deploy, and passing CI didn't catch them:
+  - The Proxy's rewrite to `/404` returned a 200 on Vercel, which serves `/404` as a static file. `next start` has no such route, so it 404ed locally. It now rewrites to a path that matches nothing. Lesson: check status codes on the real host, not just locally.
+  - On an iPhone, the home heading showed `whoam`. On a first visit, Safari works out `1ch` too small (10px instead of 12px), and the typing box kept that width. Now the width cap only applies while typing. CI now also runs every browser test in WebKit on an iPhone screen, and a new test slows the font down to recreate a first visit. It fails on the old code and passes on the fix.
+- Lesson: a stale `.next` folder in my test copy kept serving old CSS, so my first "fixed" result was wrong. When a result looks too good, check the served code is the new one.

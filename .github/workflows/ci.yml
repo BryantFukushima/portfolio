@@ -43,8 +43,9 @@ jobs:
 
       - run: npm run build
 
-      # Browser smoke tests (Playwright) against the production build. Chromium is cached per
-      # Playwright version, so it only downloads when Playwright is upgraded.
+      # Browser tests (Playwright) against the production build, in Chromium and WebKit (Safari's
+      # engine). The browsers are cached per Playwright version, so they only download when
+      # Playwright is upgraded.
       - id: playwright-version
         run: echo "version=$(node -p "require('./node_modules/@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
 
@@ -52,14 +53,14 @@ jobs:
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-chromium-webkit
 
       - if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --with-deps chromium webkit
 
       # A cached browser still needs its system libraries on a fresh runner.
       - if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps chromium
+        run: npx playwright install-deps chromium webkit
 
       # A placeholder address, so the contact page's reveal can be tested without the real one.
       - run: npm run test:e2e

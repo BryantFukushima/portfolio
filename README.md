@@ -2,7 +2,7 @@
 
 My portfolio: a terminal-style site with my resume, projects and contact info.
 
-**Live:** [bryantfukushima.com](https://bryantfukushima.com)
+**Live:** [www.bryantfukushima.com](https://www.bryantfukushima.com)
 
 ## How this was built
 

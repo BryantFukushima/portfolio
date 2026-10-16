@@ -5,10 +5,13 @@ import { PromptHeading } from "@/components/prompt-heading";
 import { caseStudies, sideProjects, site } from "@/content";
 import type { Project } from "@/content/schemas";
 import type { CSSVars } from "@/lib/css";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Projects",
-};
+  description: site.pages.projects.description,
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   const { path, command, sections, readLabel } = site.pages.projects;

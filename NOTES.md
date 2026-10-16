@@ -76,3 +76,14 @@ What I learned and decided at each step.
 - Playwright smoke tests click through the site in Chromium: every page loads, the nav works, the PDF downloads, the email only appears after the click, and unknown projects 404. Locally they reuse `next dev`; in CI they run against the production build.
 - The tests caught a real bug: with Cache Components, the first visit to an unknown `/projects/<slug>` returned 200, because the static shell starts streaming before `notFound()` runs. `src/proxy.ts` (Next 16's name for middleware) now checks the slug before rendering and serves a real 404.
 - Bumped `@types/node` to 24 to match the Node version the site actually runs on.
+
+### Step 11: Polish
+
+**A. SEO, link previews, favicon**
+
+- Metadata files are routes Next.js finds by name: `opengraph-image.tsx`, `icon.svg`, `apple-icon.tsx`, `sitemap.ts`, `robots.ts`. `metadataBase` (from `site.url`) turns relative paths into full URLs.
+- Every page has its own description, canonical URL and Open Graph tags through one `pageMetadata()` helper. Lesson: a page's `openGraph` replaces the layout's whole object (including the image), so the helper sets every field.
+- Link-preview cards are drawn with `next/og` in the terminal style, one per case study. The renderer only understands inline styles, flexbox and plain SVG tags (not React components), and it needs the font as a file, so JetBrains Mono's `.ttf` (open source, OFL) is in `src/assets/fonts/`. Reading it at module level lets the cards be built at build time.
+- `src/lib/theme.ts` copies the palette for the images, and a test keeps it in sync with `globals.css`.
+- Favicon: my `.ico` for older browsers, plus an `icon.svg` with the same design that switches to light strokes in dark mode (black lines vanish on dark tabs), and an Apple home-screen icon on white.
+- JSON-LD "Person" data on the home page links my name to my GitHub and LinkedIn for search engines.

@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PromptHeading } from "@/components/prompt-heading";
-import { caseStudies, findCaseStudy, site } from "@/content";
+import { caseStudies, findCaseStudy, profile, site } from "@/content";
 import type { CSSVars } from "@/lib/css";
+import { pageMetadata } from "@/lib/metadata";
 
 // Builds one page per case study at build time.
 export function generateStaticParams() {
@@ -17,7 +18,17 @@ export async function generateMetadata({
   params,
 }: PageProps<"/projects/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  return { title: findCaseStudy(slug)?.title };
+  const project = findCaseStudy(slug);
+  if (!project) return {};
+  return pageMetadata({
+    title: project.title,
+    description: project.summary,
+    path: `/projects/${slug}`,
+    image: {
+      url: `/projects/${slug}/opengraph-image`,
+      alt: `Case study by ${profile.name}`,
+    },
+  });
 }
 
 export default async function CaseStudyPage({

@@ -53,7 +53,7 @@ describe("RoleSchema", () => {
 });
 
 describe("PageIntroSchema path", () => {
-  const intro = { command: "ls", placeholder: "Soon." };
+  const intro = { command: "ls", description: "A page.", placeholder: "Soon." };
 
   it("accepts ~ and ~/page", () => {
     for (const path of ["~", "~/resume", "~/projects/ecs-migration"]) {
@@ -72,6 +72,7 @@ describe("ResumePageSchema download link", () => {
   const page = {
     path: "~/resume",
     command: "cat resume.md",
+    description: "My resume.",
     sections: {
       summary: "Summary",
       experience: "Experience",

@@ -11,6 +11,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // Lets pages use relative URLs (canonical links, preview images); Next.js prefixes this domain.
+  metadataBase: new URL(site.url),
   title: {
     default: profile.name,
     template: `%s | ${profile.name}`,

@@ -3,11 +3,14 @@ import { EmailReveal } from "@/components/email-reveal";
 import { PromptHeading } from "@/components/prompt-heading";
 import { profile, site } from "@/content";
 import type { CSSVars } from "@/lib/css";
+import { pageMetadata } from "@/lib/metadata";
 import { displayUrl } from "@/lib/urls";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact",
-};
+  description: site.pages.contact.description,
+  path: "/contact",
+});
 
 export default function ContactPage() {
   const { path, command, emailLabel, revealLabel, loadingLabel, errorMessage } =

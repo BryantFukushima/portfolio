@@ -1,8 +1,10 @@
 import type { Site } from "@/content/schemas";
 
 export const siteData: Site = {
+  url: "https://bryantfukushima.com",
   prompt: "bryant@fukushima",
-  description: "Portfolio of Bryant Fukushima.",
+  description:
+    "Full-stack engineer in Hawaii building web apps with Ruby on Rails, React, TypeScript and AWS.",
   copyrightYear: 2026,
   nav: [
     { label: "home", href: "/" },
@@ -14,12 +16,16 @@ export const siteData: Site = {
     home: {
       path: "~",
       command: "whoami",
+      description:
+        "Full-stack engineer in Hawaii with 7+ years building for the web, from pixel-perfect frontends to the AWS infrastructure behind them.",
       aboutCommand: "cat about.txt",
       resumeLinkLabel: "view resume",
     },
     resume: {
       path: "~/resume",
       command: "cat resume.md",
+      description:
+        "Experience, skills and education, with a downloadable PDF resume.",
       download: {
         label: "download resume",
         href: "/BryantFukushima_Resume_2026.pdf",
@@ -34,6 +40,7 @@ export const siteData: Site = {
     projects: {
       path: "~/projects",
       command: "ls projects",
+      description: "Case studies and projects by Bryant Fukushima.",
       sections: {
         caseStudies: "Case studies",
         sideProjects: "Projects",
@@ -44,6 +51,8 @@ export const siteData: Site = {
     contact: {
       path: "~/contact",
       command: "cat contact.txt",
+      description:
+        "Get in touch with Bryant Fukushima by email, GitHub or LinkedIn.",
       emailLabel: "email",
       revealLabel: "show email",
       loadingLabel: "loading…",

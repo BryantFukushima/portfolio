@@ -6,10 +6,13 @@ import { ResumeSection } from "@/components/resume-section";
 import { SkillList } from "@/components/skill-list";
 import { education, experience, profile, site, skills } from "@/content";
 import type { CSSVars } from "@/lib/css";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Resume",
-};
+  description: site.pages.resume.description,
+  path: "/resume",
+});
 
 export default function ResumePage() {
   const { path, command, download, sections } = site.pages.resume;

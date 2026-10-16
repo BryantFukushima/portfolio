@@ -25,6 +25,8 @@ export const PageIntroSchema = z.object({
     .string()
     .regex(/^~(\/[a-z0-9-]+)*$/, 'Use "~" or "~/page", e.g. ~/resume'),
   command: text,
+  // Search results and link previews show this under the page title.
+  description: text,
   placeholder: text,
 });
 
@@ -82,6 +84,7 @@ export const ProjectsPageSchema = PageIntroSchema.omit({
 // The 404 page reads like a failed `cd`: "cd projects/zzz" → "cd: no such file or directory: …".
 export const NotFoundPageSchema = PageIntroSchema.omit({
   placeholder: true,
+  description: true,
 }).extend({
   title: text,
   // Shown in place of the typed path until the browser fills it in.
@@ -93,6 +96,8 @@ export const NotFoundPageSchema = PageIntroSchema.omit({
 });
 
 export const SiteSchema = z.object({
+  // Production address, used to build full URLs for link previews, canonical links and the sitemap.
+  url: z.url().refine((url) => !url.endsWith("/"), "No trailing slash"),
   prompt: text,
   description: text,
   copyrightYear: z.number().int().min(2026),

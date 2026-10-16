@@ -67,4 +67,4 @@ What I learned and decided at each step.
 - Project details live in `projects.ts` and are checked by Zod. A discriminated union on `kind` means a case study must have a `slug` and a side project must have a `link`. Each case study's body is MDX in `src/content/projects/<slug>.mdx`, loaded with a dynamic `import()`.
 - `src/mdx-components.tsx` (required by `@next/mdx`) styles Markdown elements to match the site, and makes `<ArchitectureDiagram>` usable in any MDX file without an import.
 - The diagram is HTML lists, not an image, so it's real text: screen readers read it, it scales with the font and it stacks on mobile.
-- Built the case study with placeholders first; the real write-up comes once I've answered the content questions.
+- The case study is about my own work (the problem, my role, results and lessons), not my employer's system. The company isn't named and there are no internal details: no service names, numbers, security specifics or roadmap. The stack is reduced to AWS ECS, Docker and CI/CD.

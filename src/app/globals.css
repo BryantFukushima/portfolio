@@ -19,7 +19,7 @@
   /* Typing effect for PromptHeading. Both read --chars (the command's length) from the heading.
      They must be `inline`: otherwise var(--chars) resolves on :root, where it doesn't exist. */
   --animate-type: type calc(var(--chars) * 70ms) steps(var(--chars), end) 300ms
-    both;
+    backwards;
   --animate-blink-out: blink-out 3s step-end calc(300ms + var(--chars) * 70ms)
     forwards;
 
@@ -33,10 +33,16 @@
     }
   }
 
-  /* Grows from 0 to the element's width; steps() reveals one character per step. */
+  /* Grows from 0 to the command's width; steps() reveals one character per step. Only `backwards`
+     (hidden during the delay), never `forwards`: once typing ends the cap goes away and the text
+     shows at its natural width. Safari can work out 1ch too small on a first visit, and a cap
+     left in place cut off the last letter ("whoam"). */
   @keyframes type {
     from {
-      width: 0;
+      max-width: 0;
+    }
+    to {
+      max-width: calc(var(--chars) * 1ch);
     }
   }
 

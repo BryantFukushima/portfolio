@@ -51,7 +51,7 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
 - [x] **10. Tests**: Vitest (schemas, utils), Playwright smoke test, both in CI
   - Understand: what's worth testing on a mostly static site
   - Done when: CI runs tests on every PR
-- [ ] **11. Polish**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, README "How this was built"
+- [x] **11. Polish**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, README "How this was built"
   - Done when: I'd send the link to a recruiter
 - [ ] **12. Launch**: PR `phase-1-frontend` → `main` (CI must pass), connect `bryantfukushima.com` in Vercel
   - Understand: production vs. preview deploys, DNS records

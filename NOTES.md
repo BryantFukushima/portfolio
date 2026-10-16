@@ -94,3 +94,10 @@ What I learned and decided at each step.
 - Automated tests also check reflow (no sideways scrolling at 320px wide) and the skip link. The reflow test found a real bug: long heading paths like `~/projects/ecs-migration` were set to never wrap and overflowed phones by up to 188px. They now break only before a `/`.
 - Things axe can't judge, found by reading the code: the header link's `aria-label` hid its visible text, which breaks voice control ("Label in Name"), so the visible text is now the name; footer links didn't say they open a new tab (now one `ExternalLink` component handles that everywhere); the resume link now says it's a PDF.
 - Lesson: a test that never fails proves nothing; break it on purpose once.
+
+**C. Lighthouse and README**
+
+- Lighthouse on a local production build: Performance 97–100 on every page, and 100 for Accessibility, Best Practices and SEO, on both mobile and desktop. The work from parts A and B (static pages, metadata, a11y fixes) already covered it, so nothing needed fixing.
+- Home on mobile scores 97, not 100, because the largest element is the `whoami` heading, which types itself out. That's the design, and it's skipped with reduced motion.
+- Measure the production build, not `next dev`: dev mode is unoptimized and scores much lower.
+- The README now explains how the site was built (stack, architecture, a11y, privacy, tests) instead of the create-next-app template.

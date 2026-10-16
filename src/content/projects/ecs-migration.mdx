@@ -1,0 +1,36 @@
+## Context
+
+A production web platform for a HIPAA-compliant product, running entirely on a single server. I led the move to containers on AWS and built the infrastructure myself, while teammates helped containerize the app. It took about 3–4 months, with the old setup running alongside the new one until the switch.
+
+## The problem
+
+- Local environments didn't match each other or production.
+- Everything shared one server, so no part could be monitored or scaled on its own.
+
+## What we built
+
+<ArchitectureDiagram
+  caption="From one server to separate container services, deployed by a CI/CD pipeline."
+  stages={[
+    { label: "Before", nodes: ["One server running everything"] },
+    {
+      label: "After",
+      nodes: [
+        "CI/CD pipeline",
+        "Container images",
+        "Separate services that scale on their own",
+      ],
+    },
+  ]}
+/>
+
+## Results
+
+- A smooth cutover with only minutes of downtime, then zero-downtime deploys.
+- Per-service metrics that make problems easier to find.
+- Improved encryption, access control and logging.
+
+## What I learned
+
+- **Infrastructure as code:** next time I'd define everything with AWS CDK or Terraform instead of clicking through the console, so changes are reviewed, versioned and repeatable.
+- **Pin image tags:** tag each image with its commit SHA instead of `latest`, so every service runs a known version and rollbacks are one step.

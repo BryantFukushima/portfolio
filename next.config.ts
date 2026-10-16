@@ -1,3 +1,4 @@
+import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -14,4 +15,7 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Lets .mdx files be imported as React components (case study pages import them by slug).
+const withMDX = createMDX({});
+
+export default withMDX(nextConfig);

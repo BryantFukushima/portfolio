@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Git pre-commit hook: runs on every `git commit`, whoever (or whatever) made the change.
+# Blocks the commit if typecheck, lint, format check or the unit tests fail.
+# (Browser tests are too slow for every commit; they run in CI.)
+# Enabled by `npm install` via the "prepare" script (git config core.hooksPath .githooks).
+
+if ! npm run --silent check; then
+  echo "" >&2
+  echo "pre-commit: npm run check failed. Fix the errors above, then commit again." >&2
+  exit 1
+fi
+
+if ! npm run --silent test; then
+  echo "" >&2
+  echo "pre-commit: unit tests failed. Fix the failures above, then commit again." >&2
+  exit 1
+fi

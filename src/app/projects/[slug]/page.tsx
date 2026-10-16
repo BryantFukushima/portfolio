@@ -2,6 +2,7 @@ import type { MDXContent } from "mdx/types";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { PromptHeading } from "@/components/prompt-heading";
 import { caseStudies, findCaseStudy, profile, site } from "@/content";
 import type { CSSVars } from "@/lib/css";
@@ -31,9 +32,35 @@ export async function generateMetadata({
   });
 }
 
-export default async function CaseStudyPage({
+// `PageProps<...>["params"]` picks the type of one property (`params`) out of PageProps.
+type CaseStudyParams = PageProps<"/projects/[slug]">["params"];
+
+// The back link doesn't depend on the slug, so it shows the moment you navigate here. Everything
+// that reads the slug waits inside <Suspense>: Next.js needs that boundary around `params`, even
+// for slugs from generateStaticParams, or a client-side navigation can't show anything until the
+// slug resolves. The case study card prefetches the content, so the fallback rarely shows.
+export default function CaseStudyPage({
   params,
 }: PageProps<"/projects/[slug]">) {
+  const { backLabel } = site.pages.projects;
+
+  return (
+    <div>
+      <Link
+        href="/projects"
+        className="inline-block py-2 text-sm text-muted hover:text-teal"
+      >
+        <span aria-hidden="true">← </span>
+        {backLabel}
+      </Link>
+      <Suspense>
+        <CaseStudy params={params} />
+      </Suspense>
+    </div>
+  );
+}
+
+async function CaseStudy({ params }: { params: CaseStudyParams }) {
   const { slug } = await params;
   const project = findCaseStudy(slug);
   // Unknown slug: show the 404 page. notFound() stops rendering, so `project` is defined below.
@@ -44,21 +71,16 @@ export default async function CaseStudyPage({
   const { default: Body }: { default: MDXContent } = await import(
     `@/content/projects/${slug}.mdx`
   );
-  const { path, backLabel } = site.pages.projects;
   const command = `cat ${slug}.md`;
   const style: CSSVars = { "--chars": command.length };
 
   return (
     <div style={style}>
-      <Link
-        href="/projects"
-        className="inline-block py-2 text-sm text-muted hover:text-teal"
-      >
-        <span aria-hidden="true">← </span>
-        {backLabel}
-      </Link>
       <div className="mt-4">
-        <PromptHeading path={`${path}/${slug}`} command={command} />
+        <PromptHeading
+          path={`${site.pages.projects.path}/${slug}`}
+          command={command}
+        />
       </div>
       <article className="motion-safe:animate-reveal">
         <p className="mt-8 text-2xl font-bold sm:text-3xl">{project.title}</p>

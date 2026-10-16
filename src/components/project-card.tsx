@@ -17,7 +17,13 @@ export function ProjectCard({ project, readLabel }: ProjectCardProps) {
       <h3 className="font-bold text-teal sm:text-lg">
         {/* Checking `kind` narrows the type: inside each branch TypeScript knows which fields exist. */}
         {project.kind === "case-study" ? (
-          <Link href={`/projects/${project.slug}`} className={linkClass}>
+          // prefetch={true} loads this case study's content (not just the shared shell) before the
+          // click, so the page appears at once instead of showing its loading fallback.
+          <Link
+            href={`/projects/${project.slug}`}
+            prefetch={true}
+            className={linkClass}
+          >
             {project.title}
           </Link>
         ) : (

@@ -36,6 +36,25 @@ export const HomePageSchema = PageIntroSchema.omit({
   resumeLinkLabel: text,
 });
 
+// Resume has real content instead of a placeholder: the PDF link and the section headings.
+export const ResumePageSchema = PageIntroSchema.omit({
+  placeholder: true,
+}).extend({
+  download: InternalLinkSchema.extend({
+    // Files in public/ are served from the site root, e.g. public/resume.pdf → /resume.pdf.
+    href: z
+      .string()
+      .regex(/^\/[\w-]+\.pdf$/, "Use a PDF in public/, e.g. /resume.pdf"),
+  }),
+  // Listed in the order they appear on the page.
+  sections: z.object({
+    summary: text,
+    experience: text,
+    skills: text,
+    education: text,
+  }),
+});
+
 export const SiteSchema = z.object({
   prompt: text,
   description: text,
@@ -43,7 +62,7 @@ export const SiteSchema = z.object({
   nav: z.array(InternalLinkSchema).min(1),
   pages: z.object({
     home: HomePageSchema,
-    resume: PageIntroSchema,
+    resume: ResumePageSchema,
     projects: PageIntroSchema,
     contact: PageIntroSchema,
   }),

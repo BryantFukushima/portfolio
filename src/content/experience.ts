@@ -7,7 +7,7 @@ export const experienceData: Role[] = [
     title: "Full-Stack Engineer",
     start: "2023-06",
     bullets: [
-      "Part of the full-stack team building and maintaining a HIPAA-compliant patient reminders and online scheduling platform used by 250+ dental and orthodontic practices, sending roughly 17,800 automated texts and 8,800 automated emails per day",
+      "Part of the full-stack team building and maintaining a HIPAA-compliant patient reminders and online scheduling platform used by 250+ dental and orthodontic practices, sending roughly 17,800 automated texts (Twilio) and 8,800 automated emails (SES) per day",
       "Migrated the application from a legacy, single-instance EC2 deployment to a fully containerized architecture on AWS (ECS, ECR, RDS/PostgreSQL, ElastiCache) with CI/CD through CodePipeline and CodeBuild",
       "Build and maintain Ruby on Rails backend services, using Sidekiq for background job orchestration and Sentry for error monitoring and observability",
       "Build and maintain integrations with leading practice management systems (Cloud9, Dolphin, Greyfinch, TOPS, Open Dental, Carestream)",

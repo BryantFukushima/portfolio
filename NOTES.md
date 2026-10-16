@@ -46,3 +46,10 @@ What I learned and decided at each step.
 - One `h1` per page. Section titles use the same prompt style as `h2`s, so screen readers and search engines get a proper heading outline.
 - All text lives in `profile.ts` (pitch, about paragraphs) and is validated like the rest of the content. Home gets its own schema built from the page schema with `.omit()` and `.extend()`.
 - Skipped a headshot for now, so `next/image` moves to step 9 for project screenshots.
+
+### Step 7: Resume page
+
+- `/resume` follows the PDF: summary, experience, skills, education. Each section is a small component that takes typed data as props (`roles: Role[]`), so the page is just layout and all the text comes from `src/content/`.
+- Section headings are Markdown-style (`## Experience`), since the page is the output of `cat resume.md`. The `##` is `aria-hidden`.
+- Files in `public/` are served as-is from the site root. The PDF link is a plain `<a download>`, not `<Link>`, because it's a file, not a page. It's the web version of the resume, without phone or email.
+- Dates are stored as `YYYY-MM` and formatted with a fixed month list instead of `Date`, so time zones can't shift a month. Each date sits in a `<time dateTime>` element so machines can read it too.

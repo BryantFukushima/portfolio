@@ -5,7 +5,7 @@ export const profileData: Profile = {
   title: "Full-Stack Engineer",
   location: "Hawaii, USA - Remote",
   summary:
-    "Full-stack developer with 4+ years of experience building and scaling production web applications. Part of a small team building and maintaining a HIPAA-compliant patient communications and online scheduling platform used daily by 250+ dental and orthodontic practices, built on Ruby on Rails, React, PostgreSQL, and AWS. Migrated the platform from a legacy single-server deployment to a fully containerized AWS architecture, and currently working on a full frontend and backend rewrite to modernize the stack.",
+    "Full-stack engineer with 7+ years building for the web, including 3+ years on a production Rails/React platform. Part of a small team maintaining a HIPAA-compliant patient communications and scheduling platform used daily by 250+ dental and orthodontic practices. Migrated the platform from a legacy single-server deployment to containerized AWS ECS with CI/CD and security scanning, and currently working on a full-stack rewrite with AI-assisted features.",
   pitch:
     "7+ years building for the web, from pixel-perfect frontends to the AWS infrastructure behind them. Currently I help run a HIPAA-compliant scheduling and patient communications platform used by 250+ dental and orthodontic practices.",
   about: [

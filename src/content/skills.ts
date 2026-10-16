@@ -3,39 +3,61 @@ import type { SkillGroup } from "@/content/schemas";
 export const skillsData: SkillGroup[] = [
   {
     label: "Languages",
-    items: ["Ruby", "JavaScript", "TypeScript", "HTML", "CSS/Sass"],
-  },
-  {
-    label: "Backend",
-    items: ["Ruby on Rails", "Sidekiq", "PostgreSQL", "Node.js", "REST APIs"],
-  },
-  {
-    label: "Frontend",
     items: [
-      "React",
-      "Vue.js",
-      "Nuxt.js",
-      "Vite",
-      "TanStack",
-      "Tailwind",
-      "shadcn/ui",
+      "Ruby",
+      "JavaScript",
+      "TypeScript",
+      "SQL",
+      "HTML",
+      "CSS/Sass",
+      "Bash",
     ],
   },
   {
-    label: "Testing",
-    items: ["Vitest", "Playwright"],
+    label: "Backend",
+    items: [
+      "Ruby on Rails",
+      "ActiveRecord",
+      "Sidekiq",
+      "Devise",
+      "Node.js",
+      "REST APIs",
+      "PostgreSQL",
+      "Redis/Valkey",
+    ],
+  },
+  {
+    label: "Frontend",
+    items: ["React", "Vue.js", "Nuxt.js", "Material UI", "Ant Design"],
+  },
+  {
+    label: "Testing & Security",
+    items: [
+      "RSpec",
+      "FactoryBot",
+      "Playwright",
+      "Brakeman",
+      "bundler-audit",
+      "gitleaks",
+    ],
   },
   {
     label: "Cloud & DevOps",
     items: [
-      "AWS (ECS, ECR, EC2, RDS, ElastiCache, SES, CodePipeline, CodeBuild)",
+      "AWS (ECS, ECR, EC2, RDS, ElastiCache, S3, CloudFront, SES, CodePipeline)",
       "Docker",
-      "Git/GitHub",
+      "CircleCI",
       "Sentry",
     ],
   },
   {
-    label: "Other",
-    items: ["AI integration (Claude)", "WordPress"],
+    label: "Integrations & AI",
+    items: [
+      "Claude / Claude Code",
+      "OpenAI API",
+      "Twilio",
+      "CoreDial & SkySwitch VoIP",
+      "WordPress",
+    ],
   },
 ];

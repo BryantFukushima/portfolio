@@ -53,7 +53,7 @@ Personal portfolio site, built in small, reviewable steps. Each phase has its ow
   - Done when: CI runs tests on every PR
 - [x] **11. Polish**: SEO, OG image, favicon, a11y pass, Lighthouse 95+, README "How this was built"
   - Done when: I'd send the link to a recruiter
-- [ ] **12. Launch**: PR `phase-1-frontend` → `main` (CI must pass), connect `bryantfukushima.com` in Vercel
+- [x] **12. Launch**: PR `phase-1-frontend` → `main` (CI must pass), connect `bryantfukushima.com` in Vercel
   - Understand: production vs. preview deploys, DNS records
   - Done when: `bryantfukushima.com` serves the Phase 1 site, and I send the link to a recruiter
 

@@ -1,7 +1,7 @@
 import type { Site } from "@/content/schemas";
 
 export const siteData: Site = {
-  url: "https://bryantfukushima.com",
+  url: "https://www.bryantfukushima.com",
   prompt: "bryant@fukushima",
   description:
     "Full-stack engineer in Hawaii building web apps with Ruby on Rails, React, TypeScript and AWS.",

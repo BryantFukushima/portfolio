@@ -17,7 +17,12 @@ export default defineConfig({
     contextOptions: { reducedMotion: "reduce" },
     trace: "retain-on-failure",
   },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  // Chromium on desktop, plus WebKit (Safari's engine) as an iPhone: Safari once cut off the last
+  // letter of typed headings, and Chromium never showed it.
+  projects: [
+    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: "mobile-safari", use: { ...devices["iPhone 15 Pro"] } },
+  ],
   webServer: {
     command: isCI ? "npm run start" : "npm run dev",
     url: "http://localhost:3000",

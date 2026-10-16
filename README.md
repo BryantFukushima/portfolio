@@ -2,7 +2,7 @@
 
 My portfolio: a terminal-style site with my resume, projects and contact info.
 
-**Live:** [bryantfukushima.com](https://bryantfukushima.com)
+**Live:** [www.bryantfukushima.com](https://www.bryantfukushima.com)
 
 ## How this was built
 
@@ -40,7 +40,7 @@ I built this site step by step from [`ROADMAP.md`](ROADMAP.md), one small, revie
 ### Tests and CI
 
 - **Unit tests (Vitest):** schema rules, the date and URL helpers, the email action, and checks on the real content.
-- **Browser tests (Playwright):** every page loads, the nav works, the resume PDF downloads, the email reveal works, unknown pages return 404, and there are the accessibility checks above.
+- **Browser tests (Playwright)** in desktop Chromium and mobile Safari (WebKit): every page loads, the nav works, the resume PDF downloads, the email reveal works, unknown pages return 404, typed headings never get cut off, and there are the accessibility checks above.
 - **CI** runs on every push: `npm audit`, typecheck, lint, format check, unit tests, a production build, then the browser tests against that build.
 - A git pre-commit hook runs `npm run check` and the unit tests.
 
@@ -54,14 +54,14 @@ echo "CONTACT_EMAIL=you@example.com" > .env.local   # the address "show email" r
 npm run dev                                          # http://localhost:3000
 ```
 
-| Command            | What it does                                                     |
-| ------------------ | ---------------------------------------------------------------- |
-| `npm run dev`      | Dev server at http://localhost:3000                              |
-| `npm run check`    | Typecheck, lint and format check                                 |
-| `npm test`         | Unit tests                                                       |
-| `npm run test:e2e` | Browser tests (run `npx playwright install chromium` once first) |
-| `npm run build`    | Production build                                                 |
-| `npm run format`   | Format everything with Prettier                                  |
+| Command            | What it does                                                            |
+| ------------------ | ----------------------------------------------------------------------- |
+| `npm run dev`      | Dev server at http://localhost:3000                                     |
+| `npm run check`    | Typecheck, lint and format check                                        |
+| `npm test`         | Unit tests                                                              |
+| `npm run test:e2e` | Browser tests (run `npx playwright install chromium webkit` once first) |
+| `npm run build`    | Production build                                                        |
+| `npm run format`   | Format everything with Prettier                                         |
 
 ## Credits
 

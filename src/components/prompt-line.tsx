@@ -14,7 +14,7 @@ export type PromptLineProps = {
 
 // Heading styled as a shell line, e.g. "bryant@fukushima:~/resume [logo] cat resume.md".
 // The prompt is static; on page titles the command types itself out. The full text is always in
-// the HTML; CSS only reveals the command one character (1ch) at a time.
+// the HTML; CSS only reveals the command one character (1ch) at a time, then leaves it uncapped.
 // On narrow screens the line breaks between the prompt and the logo, and long paths break at "/".
 // Presentational only (no content imports), so client components can use it too.
 export function PromptLine({
@@ -56,7 +56,7 @@ export function PromptLine({
         <Logo className="mr-3 ml-1 text-magenta" />
         {isTitle ? (
           <>
-            <span className="inline-block w-[calc(var(--chars)*1ch)] overflow-hidden align-bottom whitespace-nowrap motion-safe:animate-type">
+            <span className="inline-block overflow-hidden align-bottom whitespace-nowrap motion-safe:animate-type">
               {command}
             </span>
             <Cursor />
